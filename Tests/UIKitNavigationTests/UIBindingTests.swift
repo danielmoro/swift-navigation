@@ -22,6 +22,10 @@ final class UIBindingTests: XCTestCase {
 
     XCTAssertNil(UIBinding($count))
 
+
+    let initializedBinding = UIBinding($count, initialValue: 3)
+    XCTAssertEqual(initializedBinding.wrappedValue, 3)
+
     count = 42
     let unwrappedCountBinding = try XCTUnwrap(UIBinding($count))
     XCTAssertEqual(count, 42)

@@ -241,6 +241,18 @@ public struct UIBinding<Value>: Sendable {
     self.init(location: open(base.location), transaction: base.transaction)
   }
 
+  /// Creates a binding by projecting the base value to an unwrapped value.
+  ///
+  /// - Parameters
+  /// -  base: A value to project to an unwrapped value.
+  /// - initialValue: a value to use as initial value of the binding
+  public init(_ base: UIBinding<Value?>, initialValue: Value) {
+    func open(_ location: some _UIBinding<Value?>) -> any _UIBinding<Value> {
+      _UIBindingFromOptional(initialValue: initialValue, base: location)
+    }
+    self.init(location: open(base.location), transaction: base.transaction)
+  }
+
   /// Creates a binding by projecting the base optional value to a Boolean value.
   ///
   /// - Parameters:
